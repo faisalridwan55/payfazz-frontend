@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { RingLoader } from 'react-spinners';
 import './index.sass';
  
-class MySpinner extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+class MySpinner extends Component {
   render() {
     const { loading } = this.props;
     if (loading) {
