@@ -1,29 +1,46 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Switch, Router, Route, NavLink, Redirect } from 'react-router-dom';
 import './index.sass';
 import Home from '../home';
+import Detail from '../detail';
 import * as RB from 'react-bootstrap';
+import history from '../../plugins/history';
 
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <RB.Navbar bg="dark" variant="dark" className="flex-column">
-          <RB.Navbar.Brand href="/">Top News</RB.Navbar.Brand>
+          <RB.Navbar.Brand href="/all">Indo News</RB.Navbar.Brand>
           <RB.Nav>
-            <Link to="/">All News</Link>
-            <Link to="/money">Money</Link>
-            <Link to="/sport">Sport</Link>
-            <Link to="/science">Science</Link>
+            <NavLink exact to="/all">All News</NavLink>
+            <NavLink exact to="/business">Business</NavLink>
+            <NavLink exact to="/entertainment">Entertainment</NavLink>
+            <NavLink exact to="/general">General</NavLink>
+            <NavLink exact to="/health">Health</NavLink>
+            <NavLink exact to="/science">Science</NavLink>
+            <NavLink exact to="/sport">Sport</NavLink>
+            <NavLink exact to="/technology">Technology</NavLink>
           </RB.Nav>
         </RB.Navbar>
         
-        <Route 
-          path={"/"} component={Home}
-        />
-        <Route 
-          path={"/:type"} component={Home}
-        />
+        <Switch>
+          <Route exact path="/" render={() => (
+              <Redirect to="/all"/>
+          )}/>
+          <Route
+            exact
+            path={"/:type/detail"} component={Detail}
+          />
+          <Route 
+            exact
+            path={"/:type(all|business|entertainment|general|health|science|sport|technology)"}
+            component={Home}
+          />
+          <Route render={() => (
+              <Redirect to="/all"/>
+          )}/>
+        </Switch>
       </Router>
     );
   }
