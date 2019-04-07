@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
-import * as RB from 'react-bootstrap';
 import './index.sass';
+import history from '../../plugins/history';
 
 class NewsCard extends Component {
+  constructor(props) {
+    super(props);
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+  clickHandler(e) {
+    const param = {
+      news: e
+    }
+    history.push(`${history.location.pathname}/detail`, {param: param});
+  }
   render() {
     const { news } = this.props;
 
     return (
-      <div className="my-news container">
+      <div className="my-news container" onClick={this.clickHandler.bind(this, news)}>
         <div className="row overlay">
           <div style={{width: '30%'}}>
             <img
@@ -17,15 +27,15 @@ class NewsCard extends Component {
             />
           </div>
           <div className="px-4" style={{width: '70%'}}>
-            <RB.Row>
+            <div className="row">
               <div className="title">{news.title}</div>
-            </RB.Row>
-            <RB.Row>
+            </div>
+            <div className="row">
               <small>{news.author}</small>
-            </RB.Row>
-            <RB.Row>
+            </div>
+            <div className="row">
               <small>{news.publishedAt.slice(0,-10)}</small>
-            </RB.Row>
+            </div>
           </div>
         </div>
       </div>

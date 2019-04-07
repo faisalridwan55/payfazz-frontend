@@ -4,7 +4,6 @@ import * as RB from 'react-bootstrap';
 import Carousel from '../../components/Carousel';
 import MySpinner from '../../components/MySpinner';
 import NewsCard from '../../components/NewsCard';
-import './index.sass';
 
 class Home extends Component {
   constructor(props) {
@@ -59,22 +58,25 @@ class Home extends Component {
       title = `${type.charAt(0).toUpperCase()}${type.slice(1)}`;
     }
     return (
-      <RB.Container className="mt-4">
+      <RB.Container className="pt-4 my-home my-backdrop">
         <MySpinner loading={this.state.loading} />
-        <h2 style={{fontWeight: "bolder"}}>{title}</h2>
+        <h2 className="ml-4" style={{fontWeight: "bolder"}}>{title}</h2>
         <div className="col-10 offset-1">
-          <RB.Row className="mt-4">
+          <div className="row mt-4">
             <Carousel data={this.state.carousel_data}/>
-          </RB.Row>
-          <RB.Row className="mt-4">
-            <div className="news-wrapper">
+          </div>
+
+          <hr/>
+
+          <div className="row mt-4">
+            <div className="wrapper">
               {this.state.data.map((news, index) =>
-                <div className="item" key={index}>
+                <div className="mb-3 w-50" key={index}>
                   <NewsCard news={news} />
                 </div>
               )}
             </div>
-          </RB.Row>
+          </div>
         </div>
       </RB.Container>
     );
