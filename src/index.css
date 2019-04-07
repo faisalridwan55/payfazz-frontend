@@ -5,3 +5,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.wrapper{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.my-backdrop{
+  border-right: 1px solid #6c757d;
+  border-left: 1px solid #6c757d;
+  border-bottom: 1px solid #6c757d;
+  background-color: rgba(0,0,0,.03);
+  min-height: 100vh;  
+}
